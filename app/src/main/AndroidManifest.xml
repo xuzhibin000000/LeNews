@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".MainActivity"
 
-            android:label="乐闻趣事"/>
+            android:label="央视新闻"/>
 
     </application>
 

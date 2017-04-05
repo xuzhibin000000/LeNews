@@ -29,8 +29,8 @@
 
         <View
             android:id="@+id/red_point"
-            android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:background="@drawable/guide_point_red" />
 
 

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.hr.cestbon.utils.DensityUtils;
 import com.hr.cestbon.utils.SharedPreUtils;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class GuideActivity extends BaseActivity {
         initView();
         //初始化数据
         intiData();
+        Log.i("LeNews",this.getResources().getDisplayMetrics().density+"");
     }
 
     /*
@@ -72,17 +74,20 @@ public class GuideActivity extends BaseActivity {
       初始化引导页Activity的VIEW ITEM
      */
     private void initView() {
+        int dpi;
         vp = (ViewPager) findViewById(R.id.viewpager);
         ll = (LinearLayout) findViewById(R.id.ll);
         View point = null;
         //向承载3个灰圆圈的布局文件中动态添加圆圈
         Log.i("LeNews", "initView");
+
         for (int i = 0; i < 4; i++) {
             point = new View(GuideActivity.this);
             point.setBackgroundResource(R.drawable.guide_point_gray);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(40, 40);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dpi2px(this,10), DensityUtils.dpi2px(this,10));
             if (i > 0) {
-                params.leftMargin = 20;
+                params.leftMargin = DensityUtils.dpi2px(this,5);
             }
             point.setLayoutParams(params);
             Log.i("LeNews", "Point：" + point);
@@ -94,7 +99,7 @@ public class GuideActivity extends BaseActivity {
     public void startMainActivity(View view) {
 
         //如果已经打开过引导页面，则设置标记
-        SharedPreUtils.setBoolean(this, "guide_show", false);
+        SharedPreUtils.setBoolean(this, "guide_show", true);
         Intent intent = new Intent(this, MainActivity.class);
         //标准模式中，所有的Activity在一个APP中都在同一个栈，打开新的Activity时，销毁当前的Activity栈，然后创建一个新的栈，这样新打开的Activity在栈底
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
